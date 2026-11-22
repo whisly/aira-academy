@@ -44,21 +44,22 @@ point of the in-memory adapter, not a bug.
 ## Project layout
 
 ```
-portfolio/
+aira-academy/
 ├─ AiraAcademy.slnx
 ├─ database/
 │  ├─ 01-schema.sql        tables, constraints, indexes, reporting view
 │  ├─ 02-seed.sql          idempotent MERGE upsert for workshops + sessions
 │  └─ 03-procedures.sql    list / get / insert-enquiry / recent / report
-├─ src/AiraAcademy/
-│  ├─ Program.cs           composition root: DI, data protection, logging
-│  ├─ Models/              domain entities + view models
-│  ├─ Data/                repository interface + in-memory implementation + seed
-│  ├─ Services/            WorkshopCatalog, EnquiryService
-│  ├─ Controllers/         Home, Workshops, Contact
-│  ├─ Views/               Razor views, shared layout, workshop card partial
-│  └─ wwwroot/css/site.css hand-written stylesheet
-└─ tools/prepare-offline-feed.ps1   (build helper, not part of the app)
+└─ src/AiraAcademy/
+   ├─ Program.cs           composition root: DI, data protection, logging
+   ├─ Models/              domain entities + view models
+   ├─ Data/                repository interface + in-memory implementation + seed
+   ├─ Services/            WorkshopCatalog, EnquiryService
+   ├─ Controllers/         Home, Workshops, Contact
+   ├─ Views/               Razor views, shared layout, workshop card partial
+   └─ wwwroot/
+      ├─ css/site.css      hand-written stylesheet
+      └─ js/site.js        drawers + language preference
 ```
 
 ---
