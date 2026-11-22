@@ -1,0 +1,119 @@
+@model WorkshopDetailViewModel
+@{
+    ViewData["Title"] = Model.Workshop.Title;
+    ViewData["Description"] = Model.Workshop.Summary;
+}
+
+<section class="page-head detail-head accent-@Model.Workshop.Accent">
+    <div class="container">
+        <nav class="breadcrumb" aria-label="Breadcrumb">
+            <a href="/workshops">Workshops</a>
+            <span aria-hidden="true">/</span>
+            <span>@Model.Workshop.Code</span>
+        </nav>
+
+        <h1 class="display-sm">@Model.Workshop.Title</h1>
+        <p class="lede">@Model.Workshop.Summary</p>
+
+        <div class="hero-actions">
+            <a class="btn btn-primary" href="/contact?workshop=@Model.Workshop.Slug">Book a seat</a>
+            <a class="btn btn-ghost" href="#outline">See the outline</a>
+        </div>
+    </div>
+</section>
+
+<section class="section section-tight">
+    <div class="container detail-grid">
+        <div class="detail-body">
+            <h2>What this is</h2>
+            <p class="prose">@Model.Workshop.Description</p>
+
+            <h2>What you leave with</h2>
+            <ul class="tick-list">
+                @foreach (var outcome in Model.Workshop.Outcomes)
+                {
+                    <li>@outcome</li>
+                }
+            </ul>
+
+            <h2 id="outline">Outline</h2>
+            <ol class="outline-list">
+                @foreach (var line in Model.Workshop.Outline)
+                {
+                    <li>@line</li>
+                }
+            </ol>
+
+            <h2>Who it is for</h2>
+            <p class="prose">@Model.Workshop.Audience. No prior coding background required — every step is done on your own laptop with a coach beside you.</p>
+        </div>
+
+        <aside class="detail-aside">
+            <div class="panel">
+                <dl class="panel-list">
+                    <div><dt>Duration</dt><dd>@Model.Workshop.DurationDays days</dd></div>
+                    <div><dt>Level</dt><dd>@Model.Workshop.Level</dd></div>
+                    <div><dt>Audience</dt><dd>@Model.Workshop.Audience</dd></div>
+                    <div>
+                        <dt>Price</dt>
+                        <dd>
+                            RM@(Model.Workshop.PriceMyr.ToString("N0"))
+                            <small>@Model.Workshop.PriceNote</small>
+                        </dd>
+                    </div>
+                </dl>
+
+                @if (Model.NextSession is not null)
+                {
+                    <div class="next-run">
+                        <span class="chip chip-solid">Next run</span>
+                        <strong>@Model.NextSession.DateRange</strong>
+                        <span>@Model.NextSession.City · @Model.NextSession.SeatsLeft seats left</span>
+                    </div>
+                }
+
+                <a class="btn btn-primary btn-block" href="/contact?workshop=@Model.Workshop.Slug">Book a seat</a>
+                <p class="fineprint">We reply within one working day. No deposit until the dates are confirmed.</p>
+            </div>
+
+            <div class="panel panel-quiet">
+                <h3>All dates</h3>
+                @if (Model.Workshop.Sessions.Count == 0)
+                {
+                    <p class="fineprint">Dates on request.</p>
+                }
+                else
+                {
+                    <ul class="date-list">
+                        @foreach (var session in Model.Workshop.Sessions.OrderBy(s => s.StartsOn))
+                        {
+                            <li>
+                                <span>@session.DateRange</span>
+                                <small>@session.City</small>
+                            </li>
+                        }
+                    </ul>
+                }
+            </div>
+        </aside>
+    </div>
+</section>
+
+<section class="section section-alt">
+    <div class="container">
+        <div class="section-head">
+            <div>
+                <p class="eyebrow eyebrow-dark">Also running</p>
+                <h2>Two more programmes.</h2>
+            </div>
+            <a class="text-link" href="/workshops">All workshops <span aria-hidden="true">→</span></a>
+        </div>
+
+        <div class="grid grid-2">
+            @foreach (var related in Model.Related)
+            {
+                <partial name="_WorkshopCard" model="related" />
+            }
+        </div>
+    </div>
+</section>

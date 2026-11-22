@@ -1,0 +1,18 @@
+@{
+    ViewData["Title"] = "Page not found";
+    var code = ViewData["Code"] ?? 404;
+}
+
+<section class="section section-tight">
+    <div class="container narrow center">
+        <p class="eyebrow">@code</p>
+        <h1 class="display-sm">That page moved, or never existed.</h1>
+        <p class="lede">
+            The workshops are still where you left them.
+        </p>
+        <div class="hero-actions center-actions">
+            <a class="btn btn-primary" href="/workshops">See the workshops</a>
+            <a class="btn btn-ghost" href="/">Home</a>
+        </div>
+    </div>
+</section>

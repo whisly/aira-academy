@@ -1,0 +1,86 @@
+@model EnquiryForm
+@{
+    ViewData["Title"] = "Contact";
+    ViewData["Description"] = "Tell us what is slowing your team down. We will tell you honestly whether a workshop helps.";
+}
+
+<section class="page-head">
+    <div class="container">
+        <p class="eyebrow">Contact</p>
+        <h1 class="display-sm">Tell us what is slowing you down.</h1>
+        <p class="lede">
+            One form, one reply within a working day. If a workshop is not the right answer,
+            we will say so.
+        </p>
+    </div>
+</section>
+
+<section class="section section-tight">
+    <div class="container contact-grid">
+        <form class="form panel" asp-controller="Contact" asp-action="Index" method="post" novalidate>
+            <div asp-validation-summary="ModelOnly" class="form-summary"></div>
+
+            <div class="field">
+                <label asp-for="Name"></label>
+                <input asp-for="Name" autocomplete="name" placeholder="Your name" />
+                <span asp-validation-for="Name" class="field-error"></span>
+            </div>
+
+            <div class="field-row">
+                <div class="field">
+                    <label asp-for="Email"></label>
+                    <input asp-for="Email" autocomplete="email" placeholder="you@company.com" />
+                    <span asp-validation-for="Email" class="field-error"></span>
+                </div>
+
+                <div class="field">
+                    <label asp-for="Phone"></label>
+                    <input asp-for="Phone" autocomplete="tel" placeholder="+60 12 345 6789" />
+                    <span asp-validation-for="Phone" class="field-error"></span>
+                </div>
+            </div>
+
+            <div class="field">
+                <label asp-for="WorkshopSlug"></label>
+                <select asp-for="WorkshopSlug" asp-items="Model.WorkshopOptions"></select>
+                <span asp-validation-for="WorkshopSlug" class="field-error"></span>
+            </div>
+
+            <div class="field">
+                <label asp-for="Message"></label>
+                <textarea asp-for="Message" rows="6" placeholder="What are you trying to solve? A few sentences is plenty."></textarea>
+                <span asp-validation-for="Message" class="field-error"></span>
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-block">Send enquiry</button>
+            <p class="fineprint">We keep your details for this conversation only. No list, no newsletter.</p>
+        </form>
+
+        <aside class="contact-aside">
+            <div class="panel panel-quiet">
+                <h3>Prefer to talk first?</h3>
+                <p class="fineprint">
+                    Call <a href="tel:+60120000000">+60 12-000 0000</a> between 9am and 6pm,
+                    Monday to Friday.
+                </p>
+            </div>
+
+            <div class="panel panel-quiet">
+                <h3>Where we are</h3>
+                <ul class="plain-list">
+                    <li><strong>Johor</strong> Iskandar Puteri</li>
+                    <li><strong>Kuala Lumpur</strong> Sentul</li>
+                    <li><strong>Penang</strong> George Town</li>
+                </ul>
+            </div>
+
+            <div class="panel panel-quiet">
+                <h3>For companies</h3>
+                <p class="fineprint">
+                    Corporate programmes are scoped per department. Bring one workflow and a
+                    decision maker; we will bring the rest.
+                </p>
+            </div>
+        </aside>
+    </div>
+</section>

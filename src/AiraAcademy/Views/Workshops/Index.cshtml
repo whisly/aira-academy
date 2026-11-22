@@ -1,0 +1,37 @@
+@model IReadOnlyList<Workshop>
+@{
+    ViewData["Title"] = "Workshops";
+    ViewData["Description"] = "Two-day AI workshops for founders, HR, finance and management teams in Malaysia.";
+}
+
+<section class="page-head">
+    <div class="container">
+        <p class="eyebrow">The catalogue</p>
+        <h1 class="display-sm">Workshops</h1>
+        <p class="lede">
+            Every programme is two days unless stated. You bring a real problem; you leave with a
+            running system and a written handover.
+        </p>
+    </div>
+</section>
+
+<section class="section section-tight">
+    <div class="container">
+        <div class="grid grid-2">
+            @foreach (var workshop in Model)
+            {
+                <partial name="_WorkshopCard" model="workshop" />
+            }
+        </div>
+    </div>
+</section>
+
+<section class="section">
+    <div class="container cta-band">
+        <div>
+            <h2>Need something private?</h2>
+            <p>Corporate programmes run on site, scoped to one workflow and one department.</p>
+        </div>
+        <a class="btn btn-primary" href="/contact?workshop=corporate-team">Request a proposal</a>
+    </div>
+</section>

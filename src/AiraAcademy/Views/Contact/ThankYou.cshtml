@@ -1,0 +1,25 @@
+@model ThankYouViewModel
+@{
+    ViewData["Title"] = "Thank you";
+}
+
+<section class="section section-tight">
+    <div class="container narrow center">
+        <span class="big-tick" aria-hidden="true">✓</span>
+        <h1 class="display-sm">Got it. We will reply within a working day.</h1>
+        <p class="lede">
+            @if (!string.IsNullOrEmpty(Model.WorkshopTitle))
+            {
+                <text>You asked about <strong>@Model.WorkshopTitle</strong>. </text>
+            }
+            If you need to add anything, reply to the confirmation email and it lands in the same thread.
+        </p>
+
+        <p class="reference">Reference <code>@Model.Reference.ToString()[..8].ToUpperInvariant()</code></p>
+
+        <div class="hero-actions center-actions">
+            <a class="btn btn-primary" href="/workshops">Back to workshops</a>
+            <a class="btn btn-ghost" href="/">Home</a>
+        </div>
+    </div>
+</section>

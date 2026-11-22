@@ -1,0 +1,15 @@
+# build output
+bin/
+obj/
+
+# local environment
+.vs/
+*.user
+*.suo
+.dataprotection-keys/
+
+# authoring scratch space (not part of the project)
+.localfeed/
+.screenshots/
+.edge-profile/
+.chrome-profile/

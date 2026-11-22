@@ -1,0 +1,46 @@
+@model Workshop
+
+@{
+    var next = Model.Sessions
+        .Where(s => s.StartsOn >= DateOnly.FromDateTime(DateTime.UtcNow))
+        .OrderBy(s => s.StartsOn)
+        .FirstOrDefault();
+}
+
+<article class="card workshop-card accent-@Model.Accent">
+    <div class="card-top">
+        <span class="code">@Model.Code</span>
+        <span class="chip">@Model.DurationDays days</span>
+    </div>
+
+    <h3><a href="/workshops/@Model.Slug">@Model.Title</a></h3>
+    <p class="card-summary">@Model.Summary</p>
+
+    <dl class="card-meta">
+        <div>
+            <dt>Price</dt>
+            <dd>RM@(Model.PriceMyr.ToString("N0")) <small>@Model.PriceNote</small></dd>
+        </div>
+        <div>
+            <dt>Level</dt>
+            <dd>@Model.Level</dd>
+        </div>
+        <div>
+            <dt>Next run</dt>
+            <dd>
+                @if (next is not null)
+                {
+                    @next.DateRange <span class="dot">·</span> @next.City
+                }
+                else
+                {
+                    <text>On request</text>
+                }
+            </dd>
+        </div>
+    </dl>
+
+    <a class="card-link" href="/workshops/@Model.Slug">
+        See the programme <span aria-hidden="true">→</span>
+    </a>
+</article>
